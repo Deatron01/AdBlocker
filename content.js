@@ -84,3 +84,18 @@ function huntAndLearnAds() {
         } catch(e) {}
     });
 }
+
+// content.js
+
+// Figyeljük a page_context.js (MAIN world) felől érkező üzeneteket
+window.addEventListener("message", (event) => {
+    // Csak a saját magunk által küldött üzeneteket dolgozzuk fel a biztonság érdekében
+    if (event.source !== window || !event.data || event.data.from !== "AD_BLOCKER_PAGE_CONTEXT") {
+        return;
+    }
+
+    if (event.data.type === "POPUP_BLOCKED") {
+        // Továbbítjuk a background.js-nek, hogy növelje a központi számlálót
+        chrome.runtime.sendMessage({ type: "INCREMENT_BLOCKED_COUNT" });
+    }
+});

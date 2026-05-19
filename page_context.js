@@ -167,3 +167,29 @@
     }, 100);
 
 })();
+
+// page_context.js
+(function() {
+    const originalWindowOpen = window.open;
+
+    window.open = function(url, name, specs) {
+        if (!url || url === 'about:blank') {
+            console.warn("🛡️ Üres felugró ablak blokkolva.");
+            // Értesítjük a kiterjesztést a blokkolásról
+            window.postMessage({ from: "AD_BLOCKER_PAGE_CONTEXT", type: "POPUP_BLOCKED" }, "*");
+            return null;
+        }
+
+        const blacklistedKeywords = ['ad', 'click', 'pop', 'track', 'traffic', 'affiliate', 'happyleafmotion'];
+        const shouldBlock = blacklistedKeywords.some(keyword => url.toLowerCase().includes(keyword));
+
+        if (shouldBlock) {
+            console.warn(`🛡️ Külső új tab blokkolva: ${url}`);
+            // Értesítjük a kiterjesztést a blokkolásról
+            window.postMessage({ from: "AD_BLOCKER_PAGE_CONTEXT", type: "POPUP_BLOCKED" }, "*");
+            return null;
+        }
+
+        return originalWindowOpen.apply(this, arguments);
+    };
+})();
