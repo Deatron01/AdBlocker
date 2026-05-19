@@ -1,51 +1,64 @@
+<!-- popup.html -->
+
 <!DOCTYPE html>
 <html lang="hu">
 <head>
     <meta charset="UTF-8">
-    <title>Adblocker Irányítópult</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdBlock Stats</title>
+
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             width: 250px;
-            padding: 15px;
-            background-color: #1e1e1e;
-            color: #ffffff;
-            margin: 0;
-        }
-        h2 {
-            font-size: 16px;
-            margin-top: 0;
-            border-bottom: 1px solid #444;
-            padding-bottom: 5px;
-        }
-        .status {
-            font-weight: bold;
-            color: #4CAF50; /* Zöld, ha aktív */
-        }
-        .status.disabled {
-            color: #F44336; /* Piros, ha inaktív */
-        }
-        button {
-            width: 100%;
-            padding: 10px;
-            margin-top: 15px;
-            background-color: #007acc;
+            padding: 16px;
+            font-family: Arial, sans-serif;
+            background: #111827;
             color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 14px;
         }
-        button:hover {
-            background-color: #005f9e;
+
+        .card {
+            background: #1f2937;
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .title {
+            font-size: 18px;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+
+        .counter {
+            font-size: 42px;
+            color: #22c55e;
+            font-weight: bold;
+        }
+
+        .subtitle {
+            margin-top: 10px;
+            font-size: 13px;
+            color: #9ca3af;
         }
     </style>
 </head>
 <body>
-    <h2>Irányítópult</h2>
-    <p>Állapot: <span id="statusText" class="status">Aktív</span></p>
-    <button id="toggleBtn">Blokkolás kikapcsolása</button>
+
+    <div class="card">
+        <div class="title">
+            🛡️ Blokkolt reklámok
+        </div>
+
+        <div id="blockedCount" class="counter">
+            0
+        </div>
+
+        <div class="subtitle">
+            Dinamikus reklámblokkolás aktív
+        </div>
+    </div>
 
     <script src="popup.js"></script>
+
 </body>
 </html>
