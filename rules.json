@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": {
+      "urlFilter": "||googlesyndication.com",
+      "resourceTypes": ["script", "image", "sub_frame", "xmlhttprequest"]
+    }
+  },
+  {
+    "id": 2,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": {
+      "urlFilter": "||doubleclick.net",
+      "resourceTypes": ["script", "image", "sub_frame", "xmlhttprequest"]
+    }
+  },
+  {
+    "id": 3,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": {
+      "urlFilter": "||taboola.com",
+      "resourceTypes": ["script", "image", "sub_frame"]
+    }
+  },
+  {
+    "id": 4,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": {
+      "urlFilter": "||outbrain.com",
+      "resourceTypes": ["script", "image", "sub_frame"]
+    }
+  },
+  {
+    "id": 5,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": {
+      "urlFilter": "||criteo.com",
+      "resourceTypes": ["script", "image", "sub_frame"]
+    }
+  },
+  {
+    "id": 6,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": {
+      "urlFilter": "*ads*",
+      "resourceTypes": ["script"]
+    }
+  },
+  {
+    "id": 7,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": {
+      "urlFilter": "*banner*",
+      "resourceTypes": ["image", "script"]
+    }
+  },
+  {
+    "id": 8,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": {
+      "urlFilter": "*popunder*",
+      "resourceTypes": ["script", "sub_frame"]
+    }
+  }
+  {
+    "id": 101,
+    "priority": 2,
+    "action": { "type": "block" },
+    "condition": {
+      "urlFilter": "||exoclick.com",
+      "resourceTypes": ["script", "image", "sub_frame", "xmlhttprequest"]
+    }
+  },
+  {
+    "id": 102,
+    "priority": 2,
+    "action": { "type": "block" },
+    "condition": {
+      "urlFilter": "||juicyads.com",
+      "resourceTypes": ["script", "image", "sub_frame"]
+    }
+  },
+  {
+    "id": 103,
+    "priority": 2,
+    "action": { "type": "block" },
+    "condition": {
+      "urlFilter": "||trafficjunky.com",
+      "resourceTypes": ["script", "image", "sub_frame"]
+    }
+  },
+  {
+    "id": 104,
+    "priority": 2,
+    "action": { "type": "block" },
+    "condition": {
+      "urlFilter": "||ero-advertising.com",
+      "resourceTypes": ["script", "image", "sub_frame"]
+    }
+  },
+  {
+    "id": 105,
+    "priority": 2,
+    "action": { "type": "block" },
+    "condition": {
+      "urlFilter": "*chaturbate*",
+      "resourceTypes": ["script", "image", "sub_frame"]
+    }
+  },
+  {
+    "id": 106,
+    "priority": 2,
+    "action": { "type": "block" },
+    "condition": {
+      "urlFilter": "*jerkmate*",
+      "resourceTypes": ["script", "image", "sub_frame"]
+    }
+  }
+]

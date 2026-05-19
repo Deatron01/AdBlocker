@@ -1,0 +1,59 @@
+{
+  "manifest_version": 3,
+  "name": "Pro Adblocker",
+  "version": "4.0",
+  "description": "Dinamikusan tanuló blokkolás, optimalizálás és saját felület.",
+  "permissions": [
+    "declarativeNetRequest",
+    "declarativeNetRequestWithHostAccess",
+    "storage",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "declarative_net_request": {
+    "rule_resources": [
+      {
+        "id": "ruleset_1",
+        "enabled": true,
+        "path": "rules1.json"
+      },
+      {
+        "id": "ruleset_2",
+        "enabled": true,
+        "path": "rules2.json"
+      },
+      {
+        "id": "ruleset_3",
+        "enabled": true,
+        "path": "rules3.json"
+      },
+      {
+        "id": "ruleset_4",
+        "enabled": true,
+        "path": "rules4.json"
+      }
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["page_context.js"],
+      "run_at": "document_start",
+      "world": "MAIN"
+    },
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_idle",
+      "world": "ISOLATED"
+    }
+  ]
+}
