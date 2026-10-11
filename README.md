@@ -1,8 +1,7 @@
-<p align="center">
-  <img src="./.github/assets/banner.svg" alt="AdBlocker — Blocks ads. Collects nothing." width="100%" />
-</p>
+<h1 align="center">AdBlocker</h1>
 
 <p align="center">
+  Blocks ads. Collects nothing.<br />
   <samp>JAVASCRIPT · CHROME MANIFEST V3 · DECLARATIVENETREQUEST</samp>
 </p>
 
@@ -63,5 +62,7 @@ Open source. Read it, change it, make it yours.
 <br />
 
 <p align="center">
+  <a href="https://github.com/Deatron01"><img src="https://raw.githubusercontent.com/Deatron01/Deatron01/main/assets/icon.png" width="56" alt="Dea" /></a><br />
+  <sub><i>Little chaos in a quiet mind.</i></sub><br />
   <sub><samp>MORE WORK AT <a href="https://github.com/Deatron01">GITHUB.COM/DEATRON01</a></samp></sub>
 </p>
