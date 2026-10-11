@@ -1,53 +1,67 @@
-# 🛡️ Privát & Nyílt Forrású AdBlocker
+<p align="center">
+  <img src="./.github/assets/banner.svg" alt="AdBlocker — Blocks ads. Collects nothing." width="100%" />
+</p>
 
-Egy minimalista, villámgyors és maximálisan adatvédelmi fókuszú hirdetésblokkoló Google Chrome (és más Chromium-alapú) böngészőkhöz.
+<p align="center">
+  <samp>JAVASCRIPT · CHROME MANIFEST V3 · DECLARATIVENETREQUEST</samp>
+</p>
 
-## 🚀 Miért készült ez a projekt?
+### <samp>01 — WHAT IT IS</samp>
 
-A legtöbb mai népszerű hirdetésblokkolót és kiterjesztést profitorientált cégek vásárolták fel vagy üzemeltetik. Ezek a bővítmények gyakran **nyomon követik a böngészési előzményeidet, adatokat gyűjtenek rólad, és értékesítik azokat harmadik feleknek**, vagy "elfogadható hirdetések" címszóval pénzért mégis átengednek reklámokat.
+A minimal, fast ad blocker for Chrome and other Chromium browsers that collects nothing.
 
-**Ez a kiterjesztés teljesen más:**
-* 🔒 **Maximális Adatvédelem:** Nem gyűjt, nem tárol és nem küld el semmilyen adatot a böngésződből. Minden statisztika és szabály helyileg, a saját eszközödön marad.
-* 🛑 **Valódi Blokkolás:** Nem köt kompromisszumokat és nem enged át fizetett hirdetéseket. Amit letiltasz, az letiltva is marad.
-* ⚡ **Pehelykönnyű:** Nem lassítja le a böngészőt felesleges háttérfolyamatokkal és telemetriával.
+Most popular blockers are now owned or run by companies with something to sell. Some track
+what you browse, and some let paid "acceptable ads" through. This one does neither. It has
+no telemetry and no allowlist for sale, and the whole thing is a handful of files you can
+read.
 
----
+### <samp>02 — WHAT IT BLOCKS</samp>
 
-## 🛠️ Főbb Funkciók & Amit Szűr
+It is built on Manifest V3 and Chrome's own `declarativeNetRequest` engine, with a second
+line of defence that runs inside the page.
 
-A kiterjesztés a modern **Manifest V3** architektúrára és a Chrome beépített, nagy teljesítményű `declarativeNetRequest` motorjára épül, kiegészítve egy intelligens oldalszintű védelmi vonallal:
+1. **Network-level blocking.** Ad servers, scripts, trackers, images and `XHR` / `fetch`
+   requests are blocked from static rule lists and from domains learned at runtime.
+2. **Pop-ups.** `window.open` is overridden in the page's own context, which stops the
+   click-triggered windows that slip past network rules.
+3. **Redirects.** `main_frame` protection stops a page from sending you to an ad platform
+   or phishing site against your will.
+4. **Domain learning.** When a request matches a suspicious ad-network pattern, the domain
+   is learned on the fly and stays blocked.
+5. **A counter that survives restarts.** Blocked items are counted in
+   `chrome.storage.local`, so the number does not reset when the browser or the service
+   worker restarts.
 
-1. **Hálózati szintű reklámszűrés:** Automatikusan blokkolja a statikus és dinamikusan tanult listák alapján a reklámszervereket, scripteket, trackereket (követőkódokat), képeket és aszinkron (`XHR/Fetch`) lekéréseket.
-2. **Felugró ablakok (Popup) kiiktatása:** Beépített védelem a trükkös, kattintásra megnyíló kéretlen hirdetési ablakok ellen (felülírt `window.open` logika a legbiztonságosabb szűrésért).
-3. **Átirányításgátlás (`main_frame` védelem):** Megakadályozza, hogy a meglátogatott oldal akaratod ellenére átirányítson gyanús külső hirdetési platformokra vagy adathalász oldalakra.
-4. **Dinamikus Domain-Tanulás:** Ha a rendszer gyanús hirdetési hálózati mintát észlel, képes azt menet közben megtanulni és véglegesen tiltólistára tenni.
-5. **Helyi és Perzisztens Számláló:** Pontosan méri és mutatja a blokkolt elemek számát, amely a `chrome.storage.local` használatának köszönhetően a böngésző vagy a háttérfolyamat újraindulásakor sem nullázódik le.
+Nothing is collected, stored remotely or sent anywhere. Statistics and rules stay on your
+device.
 
----
+### <samp>03 — INSTALL</samp>
 
-## 💻 Telepítés Fejlesztői Módban
+It is loaded as an unpacked extension:
 
-Mivel a projekt teljesen nyílt forrású és a te ellenőrzésed alatt áll, kicsomagolt kiterjesztésként tudod hozzáadni a böngésződhöz:
+1. Download or clone this repository.
+2. Open `chrome://extensions/`.
+3. Turn on **Developer mode** in the top right.
+4. Click **Load unpacked** and choose the folder that contains `manifest.json`.
 
-1. Töltsd le vagy klónozd ezt a repót.
-2. Nyisd meg a Google Chrome-ot és navigálj a `chrome://extensions/` oldalra.
-3. A jobb felső sarokban kapcsold be a **Fejlesztői mód** (Developer mode) csúszkát.
-4. Kattints a bal felső sarokban megjelenő **Kicsomagolt betöltése** (Load unpacked) gombra.
-5. Válaszd ki azt a mappát, amiben a projekt fájljai (köztük a `manifest.json`) találhatók.
-6. Kész! A kiterjesztés máris aktívan véd.
+### <samp>04 — LAYOUT</samp>
 
----
+| File | Role |
+|---|---|
+| `manifest.json` | Extension configuration and permissions (Manifest V3) |
+| `background.js` | Service worker: manages network rules and saves statistics |
+| `content.js` | Isolated-world script that bridges the page and the extension |
+| `page_context.js` | Runs in the page's `MAIN` world to block pop-ups and injected scripts |
+| `popup.html`, `popup.js` | The popup UI and the counter |
+| `rules1.json` … `rules4.json` | Static `declarativeNetRequest` rule sets |
+| `hosts.txt`, `konvertalo.py` | A hosts list and the script that converts it into rule sets |
 
-## 📁 Projekt Felépítése
+### <samp>05 — LICENCE</samp>
 
-* `manifest.json` - A kiterjesztés konfigurációja és engedélyei (Manifest V3).
-* `background.js` - A háttérben futó Service Worker, amely a hálózati szabályokat kezeli és menti a statisztikákat.
-* `content.js` - Az elszigetelt környezetben futó script, ami hídként szolgál a weboldal és a kiterjesztés között.
-* `page_context.js` - Közvetlenül az oldal kontextusában (`MAIN` world) futó kód a felugró ablakok és injektált scriptek blokkolására.
-* `popup.html` & `popup.js` - A kiterjesztés ikonjára kattintva megjelenő letisztult felhasználói felület és a számláló.
+Open source. Read it, change it, make it yours.
 
----
+<br />
 
-## 📜 Licenc
-
-Nyílt forráskódú projekt. Szabadon módosíthatod, ellenőrizheted és testreszabhatod – nincsenek elrejtett kódok, nincsen adatlopás.
+<p align="center">
+  <sub><samp>MORE WORK AT <a href="https://github.com/Deatron01">GITHUB.COM/DEATRON01</a></samp></sub>
+</p>
